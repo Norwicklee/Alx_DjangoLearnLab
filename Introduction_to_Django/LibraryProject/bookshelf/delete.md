@@ -1,12 +1,8 @@
-from bookshelf.models import Book
+#from bookshelf.models import Book
 
-# Delete the book
-book_to_delete = Book.objects.get(title="Nineteen Eighty-Four")
-book_to_delete.delete()
-
-# Try to retrieve all books (should be empty now)
+retrieved_book.delete()  # retrieve the book instance and delete it
 all_books = Book.objects.all()
-print(all_books) #Output: <QuerySet []>
+print(all_books)
 
-# Expected Output (in a comment):
-# <QuerySet []>
+# Expected Output:
+# <QuerySet []>  <-- This is the crucial part!
