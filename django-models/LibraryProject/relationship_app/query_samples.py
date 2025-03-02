@@ -1,14 +1,13 @@
 from relationship_app.models import Author, Book, Library, Librarian
 
 def query_books_by_author(author_name):
-    authors = Author.objects.filter(name=author_name)
-    if authors:
-        for author in authors:
-            books = Book.objects.filter(author=author)
-            print(f"Books by {author.name}:")
-            for book in books:
-                print(f"- {book.title}")
-    else:
+    try:
+        author = Author.objects.get(name=author_name)
+        books = Book.objects.filter(author=author)
+        print(f"Books by {author_name}:")
+        for book in books:
+            print(f"- {book.title}")
+    except Author.DoesNotExist:
         print(f"Author '{author_name}' not found.")
 
 def list_books_in_library(library_name):
@@ -29,8 +28,10 @@ def retrieve_librarian_for_library(library_name):
         print(f"Library '{library_name}' not found.")
     except Librarian.DoesNotExist:
         print(f"No librarian found for '{library_name}'.")
-        
-#Example data creation.
+
+# Example Usage (You'll need to create some data first via the shell or admin)
+# Example data can be created in the shell by running python manage.py shell
+# and then running the following commands.
 # a1 = Author(name="Author One"); a1.save()
 # a2 = Author(name="Author Two"); a2.save()
 # b1 = Book(title="Book One", author=a1); b1.save()
@@ -43,7 +44,6 @@ def retrieve_librarian_for_library(library_name):
 # librarian1 = Librarian(name="Librarian One", library=l1); librarian1.save()
 # librarian2 = Librarian(name="Librarian Two", library=l2); librarian2.save()
 
-#Example query execution.
 #query_books_by_author("Author One")
 #list_books_in_library("Library One")
 #retrieve_librarian_for_library("Library One")
