@@ -42,19 +42,3 @@ def register(request):
         form = UserCreationForm()
     return render(request, "register.html", {"form": form})
 
-from django.contrib.auth.decorators import user_passes_test
-
-def admin_view(request):
-    if not request.user.userprofile.role == "Admin":
-        return HttpResponse("Unauthorized", status=403)
-    return HttpResponse("Admin Panel")
-
-def librarian_view(request):
-    if not request.user.userprofile.role == "Librarian":
-        return HttpResponse("Unauthorized", status=403)
-    return HttpResponse("Librarian Dashboard")
-
-def member_view(request):
-    if not request.user.userprofile.role == "Member":
-        return HttpResponse("Unauthorized", status=403)
-    return HttpResponse("Member Dashboard")
