@@ -15,14 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from django.http import HttpResponse #add this import
-
-def root_view(request): #create a view function
-    return HttpResponse("Welcome to the root of your project!")
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('relationship/', include('relationship_app.urls')),
-    path('', root_view, name='books'), #add this path
 ]
