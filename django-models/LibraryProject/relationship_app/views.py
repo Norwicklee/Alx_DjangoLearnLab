@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Book
+from django.http import HttpResponse, HttpRequest
 
 def list_books(request):
     books = Book.objects.all()
@@ -8,7 +9,7 @@ def list_books(request):
 from django.http import HttpResponse
 from .models import Book
 
-def list_books(request):
+def list_books(request: HttpRequest):
     books = Book.objects.all()
     text_list = "\n".join([f"{book.title} by {book.author.name}" for book in books])
     return HttpResponse(text_list, content_type="text/plain")
