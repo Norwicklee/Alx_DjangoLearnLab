@@ -6,7 +6,8 @@ from django.views.generic import DetailView
 # Function-based view to list all books
 def list_books(request):
     books = Book.objects.all()
-    return render(request, "list_books.html", {"books": books})
+    text_list = "\n".join([f"{book.title} by {book.author.name}" for book in books])
+    return HttpResponse(text_list, content_type="text/plain")
 
 # Class-based view for Library Details
 class LibraryDetailView(DetailView):
